@@ -86,7 +86,4 @@ test:
 #
 production:
   <<: *default
-  database: to_do_production
-  username: <%= ENV["PG_USERNAME"] %>
-  password: <%= ENV["PG_PASSWORD"] %>
-  host: localhost
+  url: <%= ENV["DATABASE_URL"] %>
