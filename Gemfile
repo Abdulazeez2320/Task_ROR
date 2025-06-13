@@ -68,4 +68,3 @@ group :test do
 end
 
 gem "dotenv-rails"
-gem "cgi", "~> 0.4.0"
