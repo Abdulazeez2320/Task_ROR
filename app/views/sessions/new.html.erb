@@ -1,34 +1,38 @@
-<div class="text-center">
-  <h1>Sign In</h1>
+<div class="text-center p-8 bg-gradient-to-br from-purple-200 via-slate-50 to-lime-50 shadow-lg rounded-xl max-w-md mx-auto mt-16 text-white">
+  <h1 class="text-3xl font-bold mb-6 text-black">Sign In</h1>
 
-  <%= form_with(model: @user, url: sessions_path, local: true) do |f| %>
+  <%= form_with(model: @user, url: sessions_path, local: true, class: "space-y-6 text-left") do |f| %>
 
     <!-- Display error message of form -->
     <% if f.object&.errors&.full_messages&.any? %>
-      <ul class='error'>
+      <ul class="bg-red-100 border border-red-400 text-red-700 p-4 rounded-md mb-4">
         <% f.object.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+          <li class="list-disc ml-5"><%= msg %></li>
         <% end %>
       </ul>
     <% end %>
 
-    <!-- Field of sessoin form -->
-    <div class='row'>
-      <%= f.label :email %>
-      <%= f.text_field :email, placeholder: 'Please enter email id' %>
+    <!-- Email Field -->
+    <div>
+      <%= f.label :email, class: "block text-sm font-medium mb-1 text-black" %>
+      <%= f.email_field :email, placeholder: 'Please enter email id', class: "w-full border-gray-400 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 px-4 py-2 border text-black hover:scale-105 transition duration-300w-full border-gray-400 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 px-4 py-2 border text-black hover:scale-105 transition duration-300" %>
     </div>
 
-    <div class='row'>
-      <%= f.label :password %>
-      <%= f.password_field :password, placeholder: 'Please enter password' %>
+    <!-- Password Field -->
+    <div>
+      <%= f.label :password, class: "block text-sm font-medium mb-1 text-black" %>
+      <%= f.password_field :password, placeholder: 'Please enter password', class: "w-full border-gray-400 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 px-4 py-2 border text-black hover:scale-105 transition duration-300" %>
     </div>
 
-    <div class='row'>
-      <%= f.submit 'Sign In' %>
+    <!-- Submit Button -->
+    <div>
+      <%= f.submit 'Sign In', class: "w-full bg-gradient-to-br from-lime-50 via-slate-50 to-purple-200 hover:from-purple-200 hover:to-lime-50 text-black font-semibold py-2 px-4 rounded-md transition duration-300 shadow-sm hover:shadow-md hover:scale-105 " %>
     </div>
 
-    <div class='row'>
-      <%= link_to 'Sign Up', new_registration_path %>
+    <!-- Sign Up Link -->
+    <div class="text-center text-sm text-black mt-4">
+      Don't have an account?
+      <%= link_to 'Sign Up', new_registration_path, class: "underline font-medium text-blue-400 hover:text-blue-600" %>
     </div>
 
   <% end %>

@@ -12,10 +12,10 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
-    redirect_to new_session_path, flash: {danger: 'You must be signed in'} if current_user.nil?
+    redirect_to new_session_path if current_user.nil?
   end
 
   def redirect_if_authenticated
-    redirect_to root_path, flash: { info: 'You are already logged in.'} if user_signed_in?
+    redirect_to root_path if user_signed_in?
   end
 end
