@@ -1,0 +1,30 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-800">Your Tasks</h1>
+    <%= link_to 'New Task', new_task_path, class: "bg-gradient-to-br from-lime-50 via-slate-50 to-purple-200 hover:from-purple-200 hover:to-lime-50 text-black font-semibold py-2 px-4 rounded-md transition duration-300 shadow-sm hover:shadow-md hover:scale-105" %>
+  </div>
+
+  <% if @tasks.any? %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <% @tasks.each do |task| %>
+        <div class="bg-gradient-to-br from-purple-200 via-slate-50 to-lime-50 rounded-xl shadow-md p-5 text-gray-800 hover:shadow-xl transition-shadow duration-300">
+          <h2 class="text-xl font-semibold mb-2"><%= task.title %></h2>
+          <p class="mb-3 text-gray-700"><%= task.description.truncate(100) %></p>
+          <div class="text-sm text-gray-600 mb-4">
+            <p><strong>Due:</strong> <%= task.due_date.strftime('%b %d, %Y') %></p>
+            <p><strong>Priority:</strong> <%= task.priority.capitalize %></p>
+          </div>
+          <div class="flex justify-between items-center">
+            <%= link_to 'Show', task_path(task), class: "text-sm text-blue-500 hover:underline hover:text-blue-700 font-medium" %>
+            <div class="space-x-2 flex items-center">
+              <%= link_to 'Edit', edit_task_path(task), class: "text-sm text-yellow-600 hover:text-yellow-800 font-medium hover:underline" %>
+              <%= button_to 'Delete', task_path(task), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "inline-block text-sm text-red-500 hover:text-red-700 font-medium hover:underline" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center text-gray-500 text-lg mt-12">No tasks yet. Start by creating one!</p>
+  <% end %>
+</div>

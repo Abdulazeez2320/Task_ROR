@@ -1,0 +1,52 @@
+<div class="text-center p-8 bg-gradient-to-br from-purple-200 via-slate-50 to-lime-50 shadow-lg rounded-xl max-w-md mx-auto mt-16 text-white">
+  <h1 class="text-3xl font-bold mb-6 text-black"><%= task.new_record? ? 'New Task' : 'Edit Task' %></h1>
+
+  <%= form_with model: task, local: true, class: "space-y-6 text-left" do |f| %>
+
+    <% if f.object.errors.any? %>
+      <ul class="bg-red-100 border border-red-400 text-red-700 p-4 rounded-md mb-4">
+        <% f.object.errors.full_messages.each do |msg| %>
+          <li class="list-disc ml-5"><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <!-- Title -->
+    <div>
+      <%= f.label :title, "Title", class: "block text-sm font-medium mb-1 text-black" %>
+      <%= f.text_field :title, placeholder: "Task title", class: "w-full border-gray-400 rounded-md shadow-sm focus:border-purple-500 focus:ring-purple-500 px-4 py-2 border text-black hover:scale-105 transition duration-300" %>
+    </div>
+
+    <!-- Description -->
+    <div>
+      <%= f.label :description, class: "block text-sm font-medium mb-1 text-black" %>
+      <%= f.text_area :description, placeholder: "Describe the task...", rows: 3, class: "w-full border-gray-400 rounded-md shadow-sm focus:border-purple-500 focus:ring-purple-500 px-4 py-2 border text-black hover:scale-105 transition duration-300" %>
+    </div>
+
+    <!-- Due Date -->
+    <div>
+      <%= f.label :due_date, class: "block text-sm font-medium mb-1 text-black" %>
+      <%= f.date_field :due_date, class: "w-full border-gray-400 rounded-md shadow-sm focus:border-purple-500 focus:ring-purple-500 px-4 py-2 border text-black hover:scale-105 transition duration-300" %>
+    </div>
+
+    <!-- Priority -->
+    <div>
+      <%= f.label :priority, class: "block text-sm font-medium mb-1 text-black" %>
+      <%= f.select :priority, priorities, {}, class: "w-full border-gray-400 rounded-md shadow-sm focus:border-purple-500 focus:ring-purple-500 px-4 py-2 border text-black hover:scale-105 transition duration-300" %>
+    </div>
+
+    <!-- Submit -->
+    <div>
+    <%= f.submit task.new_record? ? "Create Task" : "Update Task",
+      class: "w-full bg-gradient-to-br from-lime-50 via-slate-50 to-purple-200 hover:from-purple-200 hover:to-lime-50 text-black font-semibold py-2 px-4 rounded-md transition duration-300 shadow-sm hover:shadow-md hover:scale-105",
+      data: { disable_with: "please wait..." } %>
+    </div>
+
+    <!-- Back Link -->
+    <div class="text-center text-sm text-black mt-4">
+      <%= link_to 'Back to Tasks', tasks_path, class: "underline font-medium text-blue-400 hover:text-blue-600" %>
+    </div>
+
+  <% end %>
+</div>
+

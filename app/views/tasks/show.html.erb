@@ -1,0 +1,31 @@
+<div class="max-w-xl mx-auto mt-16 p-8 bg-gradient-to-br from-purple-200 via-slate-50 to-lime-50 shadow-lg rounded-xl text-black space-y-4">
+
+  <h2 class="text-3xl font-bold text-center mb-6">Task Details</h2>
+
+  <div class="space-y-2">
+    <h3 class="text-xl font-semibold"><%= @task.title %></h3>
+    <p class="text-gray-700"><%= @task.description %></p>
+    
+    <p class="text-sm text-gray-600">
+      <strong>Due:</strong> <%= @task.due_date.strftime('%B %d, %Y') %>
+    </p>
+
+    <p class="text-sm text-gray-600">
+      <strong>Priority:</strong> 
+      <span class="inline-block px-2 py-1 rounded-full 
+        <%= case @task.priority
+          when 'low' then 'bg-green-200 text-green-800'
+          when 'medium' then 'bg-yellow-200 text-yellow-800'
+          when 'high' then 'bg-red-200 text-red-800'
+        end %>">
+        <%= @task.priority.capitalize %>
+      </span>
+    </p>
+  </div>
+
+  <div class="flex justify-between mt-6">
+    <%= link_to 'Edit', edit_task_path(@task), class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300 shadow-sm hover:scale-105" %>
+    <%= link_to 'Back', tasks_path, class: "bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded-md transition duration-300 shadow-sm hover:scale-105" %>
+  </div>
+
+</div>
